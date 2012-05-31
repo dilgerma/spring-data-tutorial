@@ -106,6 +106,19 @@ public class TestBootsTrap extends AbstractJUnit4SpringContextTests {
     }
 
     @Test
+    public void selectAttribute(){
+        Book fdd = new Book("Feature Driven Development","3", 19.95);
+        repository.save(fdd);
+
+        EntityManager manager = em.createEntityManager();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery query = builder.createQuery(Book.class);
+        Root<Book> bookRoot = query.from(Book.class);
+        String selectedName = (String)em.createEntityManager().createQuery(query.select(bookRoot.get("title"))).getSingleResult();
+        assertEquals(fdd.getTitle(), selectedName);
+    }
+
+    @Test
     public void findByIsbnWithSpecification() {
         Book ddd = new Book("Domain Driven Design", "abcdef", 39.95);
         Book tdd = new Book("Test-Driven-Development", "abcdefg", 29.95);
