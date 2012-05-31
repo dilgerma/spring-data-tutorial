@@ -2,6 +2,7 @@ package de.effective;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -12,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  * Time: 20:22
  * To change this template use File | Settings | File Templates.
  */
-public interface BookStoreRepository extends JpaRepository<Book, String> {
+public interface BookStoreRepository extends JpaRepository<Book, String>, JpaSpecificationExecutor<Book> {
 
     public Book findByIsbn(String isbn);
 

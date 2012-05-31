@@ -1,6 +1,5 @@
 package de.effective;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,25 +11,16 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import javax.annotation.Resource;
-import javax.persistence.Cache;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnitUtil;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.metamodel.Metamodel;
 import javax.sql.DataSource;
-import javax.transaction.TransactionManager;
-import java.util.Map;
 
 /**
  * @author martin.dilger
  */
 @Configuration
-@ImportResource(value = "classpath:de/effective/spring-contextt.xml")
+@ImportResource(value = "classpath:de/effective/spring-context.xml")
 @ComponentScan(basePackages = "de.effective")
 public class ApplicationConfig {
-
 
     @Bean
     public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource) {
