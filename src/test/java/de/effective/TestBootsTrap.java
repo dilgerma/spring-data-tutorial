@@ -128,6 +128,5 @@ public class TestBootsTrap extends AbstractJUnit4SpringContextTests {
         List<Book> result = repository.findAll(specification);
         assertEquals(1, result.size());
         assertEquals(ddd, result.get(0));
-
     }
 }
