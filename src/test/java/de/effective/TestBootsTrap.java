@@ -11,8 +11,8 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.EntityType;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,6 +26,9 @@ public class TestBootsTrap extends AbstractJUnit4SpringContextTests {
 
     @Resource
     private BookStoreRepository repository;
+
+    @Resource
+    private CategoryRepository categoryRepository;
 
 
     @Test
@@ -128,5 +131,51 @@ public class TestBootsTrap extends AbstractJUnit4SpringContextTests {
         List<Book> result = repository.findAll(specification);
         assertEquals(1, result.size());
         assertEquals(ddd, result.get(0));
+    }
+
+    @Test
+    public void saveWithSeveralCategories(){
+        Category cat1 = new Category("Krimi");
+        Category cat2 = new Category(("Sci-Fi"));
+
+        categoryRepository.save(cat1);
+        categoryRepository.save(cat2);
+
+        Book book = new Book("Analysis Patterns","abc", 39.95, Arrays.asList(new Category[]{cat1, cat2}));
+        repository.save(book);
+
+        Book persistendBook = repository.findByIsbn("abc");
+        assertEquals(2, persistendBook.getCategories().size());
+
+    }
+
+    @Test
+    public void findByCategory(){
+        Category cat1 = new Category("Krimi");
+        Category cat2 = new Category("Sci-Fi");
+        Category cat3 = new Category("Romanze");
+
+        categoryRepository.save(cat1);
+        categoryRepository.save(cat2);
+        categoryRepository.save(cat3);
+
+        Book book = new Book("Analysis Patterns","abc", 39.95, Arrays.asList(new Category[]{cat1, cat2}));
+        repository.save(book);
+
+        System.out.println("LL");
+        List<Book> krimis = repository.findByCategories(new Category("Krimi"));
+        assertEquals(1, krimis.size());
+
+        List<Book> manualKrimis = repository.manuallyFindByCategory(new Category("Krimi")) ;
+        assertEquals(1, manualKrimis.size());
+        System.out.println("LL");
+
+
+        List<Book> romanzen = repository.findByCategories(new Category("Romanze"));
+        assertTrue(romanzen.isEmpty());
+
+        List<Book> manualRomanzen = repository.manuallyFindByCategory(new Category("Romanze"));
+        assertTrue(manualRomanzen.isEmpty());
+
     }
 }
