@@ -162,13 +162,11 @@ public class TestBootsTrap extends AbstractJUnit4SpringContextTests {
         Book book = new Book("Analysis Patterns","abc", 39.95, Arrays.asList(new Category[]{cat1, cat2}));
         repository.save(book);
 
-        System.out.println("LL");
         List<Book> krimis = repository.findByCategories(new Category("Krimi"));
         assertEquals(1, krimis.size());
 
         List<Book> manualKrimis = repository.manuallyFindByCategory(new Category("Krimi")) ;
         assertEquals(1, manualKrimis.size());
-        System.out.println("LL");
 
 
         List<Book> romanzen = repository.findByCategories(new Category("Romanze"));
