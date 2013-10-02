@@ -1,8 +1,6 @@
-package de.effective;
+package de.effectivetrainings;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

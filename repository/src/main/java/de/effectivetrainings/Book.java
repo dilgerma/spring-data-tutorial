@@ -1,4 +1,4 @@
-package de.effective;
+package de.effectivetrainings;
 
 import javax.persistence.*;
 import java.io.Serializable;

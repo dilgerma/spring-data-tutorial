@@ -1,4 +1,4 @@
-package de.effective;
+package de.effectivetrainings.app;
 
 /**
  * Hello world!

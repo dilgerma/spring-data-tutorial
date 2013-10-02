@@ -1,4 +1,4 @@
-package de.effective;
+package de.effectivetrainings;
 
 import org.springframework.data.jpa.domain.Specification;
 
