@@ -25,9 +25,6 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = "de.effectivetrainings")
 public class ApplicationConfig {
 
-    @Autowired
-    private BookStoreRepository bookStoreRepository;
-
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
